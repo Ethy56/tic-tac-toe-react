@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import Board from "./components/board.js"
+import { useState } from "react";
+function initalBoard() {
+  var tmp = new Array(9).fill(null);
+  for (var i = 0; i < tmp.length; i++) {
+    tmp[i] = {id: i, value: tmp[i]};
+  };
+  return tmp;
+}
+export default function App() {
+  var [board, setBoard] = useState(initalBoard());
+  var [turn, setTurn] = useState(["X","O"][Math.floor(Math.random()*2)]);
+  var [winner, setWinner] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Board values={[board, setBoard]} turn={[turn, setTurn]} winner={[winner, setWinner]}/>
+    </>
   );
 }
-
-export default App;
